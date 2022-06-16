@@ -17,6 +17,6 @@ Create a package com.springboot.app and create rest controller inside it.
 <hr/>
 
 <h3 align="center">Use case</h3>
-![285642023_1029400777718260_2942721947977269620_n](https://user-images.githubusercontent.com/65879435/174089796-03d59b84-a89b-479c-b002-8b440ae0b64d.png)
+![image](https://user-images.githubusercontent.com/65879435/174089796-03d59b84-a89b-479c-b002-8b440ae0b64d.png)
 
 
