@@ -53,6 +53,7 @@ public class CategoriesController {
 
     	categories.setName(categoriesDetails.getName());
     	categories.setSlug(categoriesDetails.getSlug());
+    	categories.setIsenabled(categoriesDetails.getIsenabled());
         final Categories updatedCategories = categoriesRepo.save(categories);
         return ResponseEntity.ok(updatedCategories);
     }
