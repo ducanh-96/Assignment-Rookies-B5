@@ -1,14 +1,79 @@
 package com.springboot.app.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException extends Exception {
-	
+public class ResourceNotFoundException  extends RuntimeException{
+
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String getMessage() {			
+		return super.getMessage();
+	}
+
+	 public ResourceNotFoundException(String Message) {
+		 super(Message);
+	}
+
 	
-	public ResourceNotFoundException(String message) {
-		super(message);
+	@Override
+	public String getLocalizedMessage() {
+		// TODO Auto-generated method stub
+		return super.getLocalizedMessage();
+	}
+
+	@Override
+	public synchronized Throwable getCause() {
+		// TODO Auto-generated method stub
+		return super.getCause();
+	}
+
+	@Override
+	public synchronized Throwable initCause(Throwable cause) {
+		// TODO Auto-generated method stub
+		return super.initCause(cause);
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+
+	@Override
+	public void printStackTrace() {
+		// TODO Auto-generated method stub
+		super.printStackTrace();
+	}
+
+	@Override
+	public void printStackTrace(PrintStream s) {
+		// TODO Auto-generated method stub
+		super.printStackTrace(s);
+	}
+
+	@Override
+	public void printStackTrace(PrintWriter s) {
+		// TODO Auto-generated method stub
+		super.printStackTrace(s);
+	}
+
+	@Override
+	public synchronized Throwable fillInStackTrace() {
+		// TODO Auto-generated method stub
+		return super.fillInStackTrace();
+	}
+
+	@Override
+	public StackTraceElement[] getStackTrace() {
+		// TODO Auto-generated method stub
+		return super.getStackTrace();
+	}
+
+	@Override
+	public void setStackTrace(StackTraceElement[] stackTrace) {
+		// TODO Auto-generated method stub
+		super.setStackTrace(stackTrace);
 	}
 }

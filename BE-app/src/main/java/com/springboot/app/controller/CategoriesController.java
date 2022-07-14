@@ -1,12 +1,9 @@
 package com.springboot.app.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,56 +14,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.app.exception.ResourceNotFoundException;
-import com.springboot.app.model.Categories;
-import com.springboot.app.repository.CategoriesRepo;
+import com.springboot.app.dto.CategoryDto;
+import com.springboot.app.dto.ResponseObject;
+import com.springboot.app.service.CategoryService;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/admin/category")
 public class CategoriesController {
+
 	@Autowired
-    private CategoriesRepo categoriesRepo;
+	private CategoryService categoryService;
 
-    @GetMapping("/")
-    public List<Categories> getAllCategories() {
-        return categoriesRepo.findAll();
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<Categories> getCategoriesById(@PathVariable(value = "id") Long id)
-        throws ResourceNotFoundException {
-    	Categories categories = categoriesRepo.findById(id)
-          .orElseThrow(() -> new ResourceNotFoundException("Category not found for this id :: " + id));
-        return ResponseEntity.ok().body(categories);
-    }
-    
-    @PostMapping("/")
-    public Categories createCategories(@Valid @RequestBody Categories categories) {
-        return categoriesRepo.save(categories);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<Categories> updateCategories(@PathVariable(value = "id") Long id,
-         @Valid @RequestBody Categories categoriesDetails) throws ResourceNotFoundException {
-    	Categories categories = categoriesRepo.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Category not found for this id :: " + id));
+	@GetMapping("/")
+//	@PreAuthorize("hasAuthority('admin')")
+	public ResponseEntity<ResponseObject> getAllCategories() {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "List Category successfully", categoryService.getAllCategory()));
+	}
+	
+	@PostMapping("/")
+//	@PreAuthorize("hasAuthority('admin')")
+	public CategoryDto addCategory(@Valid @RequestBody CategoryDto categoryDto) {
+		return categoryService.addCategory(categoryDto);
+	}
 
-    	categories.setName(categoriesDetails.getName());
-    	categories.setSlug(categoriesDetails.getSlug());
-    	categories.setIsenabled(categoriesDetails.getIsenabled());
-        final Categories updatedCategories = categoriesRepo.save(categories);
-        return ResponseEntity.ok(updatedCategories);
-    }
+	@PutMapping("/category/{id}")
+//	@PreAuthorize("hasAuthority('admin')")
+	public ResponseEntity<ResponseObject> updateCategory(@PathVariable int id,
+			@Valid @RequestBody CategoryDto categoryDto) {
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "update category successfully",
+				categoryService.updateCategory(id, categoryDto)));
+	}
 
-    @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteCategories(@PathVariable(value = "id") Long id)
-         throws ResourceNotFoundException {
-    	Categories categories = categoriesRepo.findById(id)
-       .orElseThrow(() -> new ResourceNotFoundException("Category not found for this id :: " + id));
-
-    	categoriesRepo.delete(categories);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
-    }
+	@DeleteMapping("/category/{id}")
+//	@PreAuthorize("hasAuthority('admin')")
+	public ResponseEntity<ResponseObject> deleteCategory(@PathVariable("id") int id) {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "Delete category successsful", categoryService.deleteCategory(id)));
+	}
 }
