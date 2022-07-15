@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springboot.app</groupId>
-	<artifactId>first-app</artifactId>
+	<artifactId>BE-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>first-app</name>
-	<description>Sample Spring Boot REST Api Web Services</description>
+	<name>BE-app</name>
+	<description>Sample Spring Boot REST API Web Services</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

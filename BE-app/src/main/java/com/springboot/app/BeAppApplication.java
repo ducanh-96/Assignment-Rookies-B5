@@ -9,11 +9,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableWebSecurity
+
 public class BeAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BeAppApplication.class, args);
 	}
+  
 	@Bean
 	public WebMvcConfigurerAdapter corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
